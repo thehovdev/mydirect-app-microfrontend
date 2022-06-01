@@ -1,4 +1,4 @@
 # mydirect-app-microfrontend
 
 
-React application for crating user citates with microservice architecture
+React application for create user citates with microservice architecture
