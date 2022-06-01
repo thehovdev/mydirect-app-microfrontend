@@ -11,7 +11,7 @@ const initialState : ICitates = {
       id: 1,
       title: 'Some title',
       content: 'Some content',
-      operation: 'INSERT'
+      operation: 'UPDATE'
     }
   ]
 }

@@ -11,11 +11,12 @@ export function Citates() {
     id: null,
     title: '',
     content: '',
-    operation: null
+    operation: 'INSERT'
   }
   const [citate, setCitate] = useState<ICitate>(citateItem)
   const resetCitate = () => setCitate(citateItem)
   const insertCitate = (e) => {
+    console.log('insert')
     e.preventDefault()
     dispatch(insert({
       id: Math.floor(Math.random() * 1000),
@@ -25,6 +26,7 @@ export function Citates() {
     resetCitate()
   }
   const updateCitate = (e) => {
+    console.log('update')
     e.preventDefault()
     dispatch(update({
       operation: 'UPDATE',
@@ -63,7 +65,7 @@ export function Citates() {
           <div className="col-sm-12">
             <div className="accordion" id="accordionExample">
               { citates.map((citate, i) => {
-                return <div className="accordion-item" key={citate.id}>
+                return <div className="accordion-item" key={i}>
                   <div className="accordion-header py-2" id={`heading${citate.id}`}>
                     <i className="fa-default-icon fa-solid fa-xmark-circle mx-2" onClick={() => removeCitate(i)}></i>
                     <i className="fa-default-icon fa-solid fa-pencil mx-2" onClick={() => editCitate(i)}></i>
