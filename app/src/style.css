@@ -1,0 +1,9 @@
+textarea {
+    resize: none !important;
+}
+
+.fa-default-icon {
+    color: darkcyan;
+    cursor: pointer;
+    font-size: 18px;
+}
