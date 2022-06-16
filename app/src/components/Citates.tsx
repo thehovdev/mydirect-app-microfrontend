@@ -103,8 +103,8 @@ export function Citates() {
                   </div>
                 </div>
               })}
-              { start != 0 ?  <button className="btn btn-primary my-2 me-2" onClick={() => setStart(start - 20)}>Previous</button> : '' }
-              { start != 80 ?  <button className="btn btn-primary my-2" onClick={() => setStart(start + 20)}>Next</button> : '' }
+              { start != 0 ?  <button className="btn btn-light my-2 me-2" onClick={() => setStart(start - 20)}>Previous</button> : '' }
+              { start != 80 ?  <button className="btn btn-light my-2" onClick={() => setStart(start + 20)}>Next</button> : '' }
             </div>
           </div>
         </div>
