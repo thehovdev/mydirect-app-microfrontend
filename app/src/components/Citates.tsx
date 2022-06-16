@@ -1,8 +1,9 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import { useAppSelector, useAppDispatch } from '../hooks'
-import { insert, update, remove } from '../reducers/citateClise'
+import { populate, insert, update, remove } from '../reducers/citateClise'
 import {ICitate, ICitates} from "../interfaces/Citate";
 import { RootState } from "../store/store";
+import axios from "axios";
 
 export function Citates() {
   const dispatch = useAppDispatch()
@@ -10,19 +11,25 @@ export function Citates() {
   const citateItem : ICitate = {
     id: null,
     title: '',
-    content: '',
+    body: '',
     operation: 'INSERT'
   }
   const [citate, setCitate] = useState<ICitate>(citateItem)
+  const [start, setStart] = useState<number>(0)
   const resetCitate = () => setCitate(citateItem)
+  const validateCitate = () => {
+    return citate.title !== '' && citate.body !== '';
+  };
   const insertCitate = (e) => {
-    console.log('insert')
     e.preventDefault()
-    dispatch(insert({
-      id: Math.floor(Math.random() * 1000),
-      operation: 'INSERT',
-      ...citate
-    }))
+    if(validateCitate()) {
+      dispatch(insert({
+        id: Math.floor(Math.random() * 1000),
+        operation: 'INSERT',
+        ...citate
+      }))
+    }
+
     resetCitate()
   }
   const updateCitate = (e) => {
@@ -40,6 +47,17 @@ export function Citates() {
   const removeCitate = (i: number) => {
     dispatch(remove(i))
   }
+  const populateCitates = () => {
+    axios.get(`https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=20`)
+      .then(response => {
+        dispatch(populate(response.data))
+      })
+      .catch(error => console.log(error.message()))
+  }
+
+  useEffect(() => {
+    populateCitates()
+  }, [start])
 
   return <div className="container">
         <div className="row">
@@ -52,7 +70,7 @@ export function Citates() {
               </div>
               <div className="form-group">
                 <label htmlFor="content">Content</label>
-                <textarea className="form-control" rows={3} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setCitate({...citate, content: e.target.value})} value={citate.content}></textarea>
+                <textarea className="form-control" rows={3} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setCitate({...citate, body: e.target.value})} value={citate.body}></textarea>
               </div>
 
               {
@@ -81,17 +99,16 @@ export function Citates() {
                        aria-labelledby={`heading${citate.id}`}
                        data-bs-parent="#accordionExample"
                   >
-                    <div className="accordion-body">{ citate.content }</div>
+                    <div className="accordion-body">{ citate.body }</div>
                   </div>
                 </div>
               })}
+              { start != 0 ?  <button className="btn btn-primary my-2 me-2" onClick={() => setStart(start - 20)}>Previous</button> : '' }
+              { start != 80 ?  <button className="btn btn-primary my-2" onClick={() => setStart(start + 20)}>Next</button> : '' }
             </div>
           </div>
         </div>
       </div>
-
-
-
 }
 
 // export function Citates () {

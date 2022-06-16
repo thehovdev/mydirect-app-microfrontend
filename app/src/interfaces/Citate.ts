@@ -1,7 +1,7 @@
 export interface ICitate {
   id: number,
   title: string,
-  content: string,
+  body: string,
   operation: string
 }
 export interface ICitates {

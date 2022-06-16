@@ -6,14 +6,7 @@ import {act} from "react-dom/test-utils";
 
 // Define the initial state using that type
 const initialState : ICitates = {
-  items: [
-    {
-      id: 1,
-      title: 'Some title',
-      content: 'Some content',
-      operation: 'UPDATE'
-    }
-  ]
+  items: []
 }
 
 export const citateSlice = createSlice({
@@ -21,6 +14,10 @@ export const citateSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
+
+    populate: (state, action: PayloadAction<[]>) => {
+      state.items = action.payload
+    },
     // Use the PayloadAction type to declare the contents of `action.payload`
     insert: (state, action: PayloadAction<ICitate>) => {
       state.items = [...state.items, action.payload]
@@ -38,7 +35,7 @@ export const citateSlice = createSlice({
   },
 })
 
-export const { insert, update, remove } = citateSlice.actions
+export const { populate, insert, update, remove } = citateSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const items = (state: RootState) => state.citate.items
