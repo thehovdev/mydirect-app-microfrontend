@@ -1,2 +1,1 @@
-// @ts-ignore
-import("./App");
+import('./App')

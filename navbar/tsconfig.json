@@ -5,13 +5,15 @@
     "target": "es5",
     "sourceMap": true,
     "esModuleInterop": true,
-    "jsx": "react"
+    "jsx": "react",
+    "lib": [ "es2015", "DOM"]
   },
   "exclude": [
     "node_modules"
   ],
   "include": [
-    "src"
+    "src",
+    "../../../.cache/JetBrains/WebStorm2022.1/javascript/typings/node/12.20.52/node_modules/@types/node/globals.d.ts"
   ],
   "strict": true
 }

@@ -1,7 +1,7 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin') 								/* eslint-disable-line */
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')  /* eslint-disable-line */
+const deps = require('./package.json').dependencies 									/* eslint-disable-line */
 
-const deps = require("./package.json").dependencies;
 module.exports = {
   output: {
     publicPath: "http://localhost:3000/",

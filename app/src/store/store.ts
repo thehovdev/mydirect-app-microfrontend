@@ -3,10 +3,10 @@ import citateReducer from '../reducers/citateClise'
 import counterReducer from '../reducers/counterSlice'
 
 export const store = configureStore({
-  reducer: {
-    citate: citateReducer,
-    counter: counterReducer
-  },
+	reducer: {
+		citate: citateReducer,
+		counter: counterReducer
+	},
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
