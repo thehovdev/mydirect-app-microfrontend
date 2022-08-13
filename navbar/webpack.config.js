@@ -1,14 +1,14 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin') 								/* eslint-disable-line */
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')  /* eslint-disable-line */
-const deps = require('./package.json').dependencies 									/* eslint-disable-line */
+const HtmlWebPackPlugin = require('html-webpack-plugin') /* eslint-disable-line */
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin') /* eslint-disable-line */
+const deps = require('./package.json').dependencies /* eslint-disable-line */
 
 module.exports = {
   output: {
-    publicPath: "http://localhost:3000/",
+    publicPath: 'http://localhost:3000/',
   },
 
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
   },
 
   devServer: {
@@ -20,20 +20,20 @@ module.exports = {
     rules: [
       {
         test: /\.m?js/,
-        type: "javascript/auto",
+        type: 'javascript/auto',
         resolve: {
           fullySpecified: false,
         },
       },
       {
         test: /\.(css|s[ac]ss)$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
     ],
@@ -41,11 +41,11 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "navbar",
-      filename: "remoteEntry.js",
+      name: 'navbar',
+      filename: 'remoteEntry.js',
       remotes: {},
       exposes: {
-        "./Navbar" : "/src/Navbar.tsx"
+        './Navbar': '/src/Navbar.tsx',
       },
       shared: {
         ...deps,
@@ -53,14 +53,14 @@ module.exports = {
           singleton: true,
           requiredVersion: deps.react,
         },
-        "react-dom": {
+        'react-dom': {
           singleton: true,
-          requiredVersion: deps["react-dom"],
+          requiredVersion: deps['react-dom'],
         },
       },
     }),
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
     }),
   ],
-};
+}
